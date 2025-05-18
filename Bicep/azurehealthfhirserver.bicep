@@ -61,7 +61,7 @@ resource fhirQueue 'Microsoft.Storage/storageAccounts/queueServices/queues@2024-
 // Create event grid system topic and subscription for FhirResource events
 resource fhirEventsSystemTopic 'Microsoft.EventGrid/systemTopics@2025-02-15' = {
   name: 'fhir-service-events'
-  location: 'uksouth'
+  location: location
   properties: {
     source: workspace.id
     topicType: 'Microsoft.HealthcareApis.Workspaces'
