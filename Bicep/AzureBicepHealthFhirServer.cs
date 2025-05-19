@@ -10,10 +10,8 @@ public static class AzureBicepHealthFhirServer
 {
     public static IResourceBuilder<AzureBicepResource> AddHealthDataFhirServer(this IDistributedApplicationBuilder builder, string name, IResourceBuilder<AzureStorageResource> storage)
     {
-        var storageAccountName = ReferenceExpression.Create($"{storage.GetOutput("name")}");
-
         return builder.AddBicepTemplate(name, "Bicep/azurehealthfhirserver.bicep")
-            .WithParameter("storageAccountName", () => storageAccountName)
+            .WithParameter("storageAccountName", storage.GetOutput("name"))
             .WithParameter("name", name);
     }
 }
